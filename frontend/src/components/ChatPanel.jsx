@@ -116,12 +116,12 @@ function renderMarkdown(text) {
 // ---------------------------------------------------------------------------
 
 const SUGGESTIONS = [
-  '🏠 2BHK flats in Bangalore under 80 Lakh',
-  '🏡 Houses for rent in Mumbai',
-  '💰 Best areas in Hyderabad for investment',
-  '🏢 3BHK with pool in Chennai',
-  '📊 Compare rent vs buy in Bangalore',
-  '🌳 Family-friendly localities in Mumbai',
+  '2BHK flats in Bangalore under 80 Lakh',
+  'Houses for rent in Mumbai',
+  'Best areas in Hyderabad for investment',
+  '3BHK with pool in Chennai',
+  'Compare rent vs buy in Bangalore',
+  'Family-friendly localities in Mumbai',
 ];
 
 // ---------------------------------------------------------------------------

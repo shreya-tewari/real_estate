@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Home, ArrowRight, RotateCcw, DollarSign, BedDouble, Layers, MapPin } from 'lucide-react';
+import { Search, Home, RotateCcw, DollarSign, BedDouble, Layers, MapPin, ChevronDown } from 'lucide-react';
 
 export default function FilterBar({ filters, onFilterChange, onClearFilters, activeCity, onCityChange }) {
   const [localSearch, setLocalSearch] = useState(filters.search || '');
@@ -25,7 +25,7 @@ export default function FilterBar({ filters, onFilterChange, onClearFilters, act
       return `₹${(num / 10000000).toFixed(2).replace(/\.00$/, '')} Cr`;
     }
     if (num >= 100000) {
-      return `₹${(num / 10000).toFixed(2).replace(/\.00$/, '')} L`; // Wait, 1 Lakh is 100,000, so num / 100,000 is Lakh. Ah! 100,000 / 100,000 = 1. Let's fix that.
+      return `₹${(num / 100000).toFixed(2).replace(/\.00$/, '')} L`;
     }
     return `₹${num.toLocaleString('en-IN')}`;
   };
@@ -162,7 +162,7 @@ export default function FilterBar({ filters, onFilterChange, onClearFilters, act
                 <option value="Hyderabad">Hyderabad</option>
               </select>
               <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                ▼
+                <ChevronDown className="h-4 w-4" />
               </div>
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function FilterBar({ filters, onFilterChange, onClearFilters, act
                 ))}
               </select>
               <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                ▼
+                <ChevronDown className="h-4 w-4" />
               </div>
             </div>
           </div>
@@ -316,7 +316,7 @@ export default function FilterBar({ filters, onFilterChange, onClearFilters, act
                 ))}
               </select>
               <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                ▼
+                <ChevronDown className="h-4 w-4" />
               </div>
             </div>
           </div>

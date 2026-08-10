@@ -16,8 +16,8 @@ else:
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-DEFAULT_ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
-DEFAULT_ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+DEFAULT_ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "admin@propsearch.com")
+DEFAULT_ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 
 def init_db():
     Base.metadata.create_all(bind=engine)

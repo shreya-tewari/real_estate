@@ -9,7 +9,7 @@ import AgentsModal from './components/AgentsModal';
 import PropertyFormModal from './components/PropertyFormModal';
 import MyPropertiesModal from './components/MyPropertiesModal';
 import { useAuth } from './context/AuthContext';
-import { Compass } from 'lucide-react';
+import { Compass, Building2 } from 'lucide-react';
 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
@@ -27,9 +27,7 @@ export default function App() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showAgentsModal, setShowAgentsModal] = useState(false);
   const [showMyProperties, setShowMyProperties] = useState(false);
-  const [propertyForEdit, setPropertyForEdit] = useState(null); // null = closed, {} = new, object = edit
-  const [showAddForm, setShowAddForm] = useState(false);
-
+  const [propertyForEdit, setPropertyForEdit] = useState(null); // null = closed, object = edit
 
   const [filters, setFilters] = useState({
     type: 'buy', property_type: '', bhk: '', min_price: '', max_price: '', search: '',
@@ -85,7 +83,6 @@ export default function App() {
     fetchProperties();
   }, [activeCity, filters.type, filters.property_type, filters.bhk, filters.min_price, filters.max_price, filters.search]);
 
-  const handleAddPropertyClick = () => setShowAddForm(true);
   const handleEditProperty = (property) => setPropertyForEdit(property);
 
   const handleDeleteProperty = async (id) => {
@@ -111,7 +108,6 @@ export default function App() {
         onBuyClick={handleBuyClick}
         onRentClick={handleRentClick}
         onFindAgentClick={() => setShowAgentsModal(true)}
-        onAddPropertyClick={handleAddPropertyClick}
         onMyPropertiesClick={() => setShowMyProperties(true)}
       />
 
@@ -162,7 +158,11 @@ export default function App() {
             </div>
           ) : properties.length === 0 ? (
             <div className="glass-card rounded-3xl p-12 text-center max-w-md mx-auto border border-slate-200/60 bg-white">
-              <div className="text-slate-400 text-5xl mb-4 font-normal">🏠</div>
+              <div className="flex justify-center mb-4">
+                <div className="h-12 w-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400">
+                  <Building2 className="h-6 w-6" />
+                </div>
+              </div>
               <h3 className="font-extrabold text-slate-800 text-base mb-1">No Matching Properties</h3>
               <p className="text-slate-500 text-xs mb-6 max-w-xs mx-auto leading-relaxed">
                 We couldn't find any listings matching your search parameters in {activeCity}. Try adjusting your budget or search text.
@@ -197,13 +197,6 @@ export default function App() {
 
       {showAgentsModal && (
         <AgentsModal properties={properties} city={activeCity} onClose={() => setShowAgentsModal(false)} />
-      )}
-
-      {showAddForm && (
-        <PropertyFormModal
-          onClose={() => setShowAddForm(false)}
-          onSaved={() => fetchProperties()}
-        />
       )}
 
       {propertyForEdit && (

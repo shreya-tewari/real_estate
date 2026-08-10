@@ -69,12 +69,12 @@ export default function PropertyModal({ property, onClose }) {
           />
           {/* Badges */}
           <div className="absolute bottom-4 left-4 flex gap-2">
-            <span className={`px-3 py-1 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md text-white ${
-              type === 'rent' ? 'bg-indigo-600' : 'bg-emerald-600'
-            }`}>
+            <span className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider text-white shadow-sm ${
+              type === 'rent' ? 'bg-slate-900/90' : 'bg-brand-700/90'
+            } backdrop-blur-xs`}>
               For {type === 'rent' ? 'Rent' : 'Sale'}
             </span>
-            <span className="px-3 py-1 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md text-slate-800 bg-white/95 backdrop-blur-xs">
+            <span className="px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider text-slate-700 bg-white/95 backdrop-blur-xs border border-slate-200/60 shadow-sm">
               {property_type === 'flat' ? 'Flat' : 'House'}
             </span>
           </div>
@@ -84,8 +84,8 @@ export default function PropertyModal({ property, onClose }) {
         <div className="w-full md:w-1/2 p-6 md:p-8 overflow-y-auto flex flex-col justify-between">
           <div>
             {/* Header */}
-            <div className="flex items-center gap-1.5 text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">
-              <span className="text-brand-600">{locality}</span>
+            <div className="flex items-center gap-1.5 text-slate-500 text-xs font-semibold uppercase tracking-wider mb-2">
+              <span className="text-brand-700 font-bold">{locality}</span>
               <span>•</span>
               <span>{city}</span>
             </div>
@@ -96,10 +96,10 @@ export default function PropertyModal({ property, onClose }) {
 
             {/* Price */}
             <div className="mb-6">
-              <span className="text-xs text-slate-400 block font-bold uppercase tracking-wider">
+              <span className="text-[11px] text-slate-400 block font-semibold uppercase tracking-wider">
                 Asking Price
               </span>
-              <span className="text-2xl font-black text-brand-600">
+              <span className="text-2xl font-extrabold text-slate-900">
                 {formatPrice(price, type)}
               </span>
             </div>
