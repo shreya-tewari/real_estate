@@ -38,6 +38,11 @@ def startup_event():
     init_db()
 
 
+@app.get("/")
+def root():
+    return {"message": "Indian Property Search API is running", "docs": "/docs"}
+
+
 # ---------------- Image Upload ----------------
 
 @app.post("/api/upload-image")
