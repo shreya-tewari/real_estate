@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { X, Pencil, Trash2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 export default function MyPropertiesModal({ onClose, onEdit, onDeleted }) {
     const { token, user } = useAuth();

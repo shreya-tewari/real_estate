@@ -1,5 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException, Query, status, UploadFile, File
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
@@ -38,9 +41,27 @@ def startup_event():
     init_db()
 
 
-@app.get("/")
-def root():
-    return {"message": "Indian Property Search API is running", "docs": "/docs"}
+# Serve React frontend static files if the dist folder exists
+FRONTEND_DIST = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+if os.path.isdir(FRONTEND_DIST):
+    app.mount("/assets", StaticFiles(directory=os.path.join(FRONTEND_DIST, "assets")), name="assets")
+
+    @app.get("/")
+    def serve_root():
+        return FileResponse(os.path.join(FRONTEND_DIST, "index.html"))
+
+    @app.get("/{full_path:path}")
+    def serve_spa(full_path: str):
+        """Catch-all: serve index.html for any non-API route (SPA client-side routing)."""
+        # Don't intercept /api/* routes — FastAPI handles those
+        file_path = os.path.join(FRONTEND_DIST, full_path)
+        if os.path.isfile(file_path):
+            return FileResponse(file_path)
+        return FileResponse(os.path.join(FRONTEND_DIST, "index.html"))
+else:
+    @app.get("/")
+    def root():
+        return {"message": "Indian Property Search API is running", "docs": "/docs"}
 
 
 # ---------------- Image Upload ----------------
